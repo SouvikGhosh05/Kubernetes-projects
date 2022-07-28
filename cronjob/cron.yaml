@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: busybox-cron
+spec:
+  schedule: "* * * * *"
+  startingDeadlineSeconds: 17
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: busyboxc
+            image: busybox
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster 2>&1
+          restartPolicy: OnFailure
