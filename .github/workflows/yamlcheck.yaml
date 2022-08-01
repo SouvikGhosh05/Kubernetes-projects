@@ -1,0 +1,33 @@
+name: Yaml Lint Check
+on: 
+  pull_request
+  push:
+    branches:
+      - main
+
+jobs:
+  lintAllTheThings:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - id: yaml-lint
+      uses: ibiqlik/action-yamllint@v3
+      with:
+        config_data: |
+          extends: default
+          rules:
+            new-line-at-end-of-file:
+              level: warning
+            trailing-spaces:
+              level: warning
+
+  uploadArtifact:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/upload-artifact@v2
+    - name: uploading-logs
+      run: echo ${{ jobs.lintAllTheThings.steps.yaml-lint.outputs.logfile }} 
+      if: always()
+      with:
+        name: yamllint-logfile
+        path: ${{ jobs.lintAllTheThings.steps.yaml-lint.outputs.logfile }}
