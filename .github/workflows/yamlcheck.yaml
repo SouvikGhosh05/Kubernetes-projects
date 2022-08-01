@@ -14,14 +14,10 @@ jobs:
     - id: yaml-lint
       uses: ibiqlik/action-yamllint@v3
 
-  uploadArtifact:
-    needs: [lintAllTheThings]
-    runs-on: ubuntu-latest
-    steps:
+    - uses: actions/upload-artifact@v2
     - name: uploading-logs
-      uses: actions/upload-artifact@v2
-    - run: echo ${{ jobs.lintAllTheThings.steps.yaml-lint.outputs.logfile }}
+      run: echo ${{ steps.yaml-lint.outputs.logfile }}
       if: always()
       with:
         name: yamllint-logfile
-        path: ${{ jobs.lintAllTheThings.steps.yaml-lint.outputs.logfile }}
+        path: ${{ steps.yaml-lint.outputs.logfile }}
