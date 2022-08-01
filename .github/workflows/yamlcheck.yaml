@@ -7,17 +7,16 @@ on:
 
 jobs:
   lintAllTheThings:
-    name: yaml-linting
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - id: yaml-lint
-      uses: ibiqlik/action-yamllint@v3
+      - uses: actions/checkout@v2
+      - id: yaml-lint
+        uses: ibiqlik/action-yamllint@v3
 
-    - uses: actions/upload-artifact@v2
-    - name: uploading-logs
-      run: echo ${{ steps.yaml-lint.outputs.logfile }}
-      if: always()
-      with:
-        name: yamllint-logfile
-        path: ${{ steps.yaml-lint.outputs.logfile }}
+      - run: echo ${{ steps.yaml-lint.outputs.logfile }}
+
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: yamllint-logfile
+          path: ${{ steps.yaml-lint.outputs.logfile }}
