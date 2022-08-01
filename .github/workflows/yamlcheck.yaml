@@ -24,7 +24,7 @@ jobs:
 
     - name: uploading-logs
       uses: actions/upload-artifact@v2
-      run: echo ${{ steps.yaml-lint.outputs.logfile }}
+    - run: echo ${{ steps.yaml-lint.outputs.logfile }}
       if: always()
       with:
         name: yamllint-logfile
