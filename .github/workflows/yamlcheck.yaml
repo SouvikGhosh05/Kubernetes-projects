@@ -31,5 +31,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: yamllint-logfile
+          name: yamllint-logs
           path: ${{ steps.yaml-lint.outputs.logfile }}
