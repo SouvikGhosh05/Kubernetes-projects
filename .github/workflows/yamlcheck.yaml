@@ -22,8 +22,11 @@ jobs:
                 level: warning
               indentation:
                 level: warning
+              empty-lines:
+                level: warning
 
-      - run: echo ${{ steps.yaml-lint.outputs.logfile }}
+      - name: "Logging warnings"
+        run: echo ${{ steps.yaml-lint.outputs.logfile }}
 
       - uses: actions/upload-artifact@v2
         if: always()
