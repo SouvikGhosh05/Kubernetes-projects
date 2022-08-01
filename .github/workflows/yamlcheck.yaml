@@ -9,9 +9,10 @@ jobs:
   lintAllTheThings:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - id: yaml-lint
       uses: ibiqlik/action-yamllint@v3
+      run: echo ${{ steps.yaml-lint.outputs.logfile }} >> logfile
       with:
         config_data: |
           extends: default
@@ -23,7 +24,6 @@ jobs:
 
     - uses: actions/upload-artifact@v2
     - name: uploading-logs
-      run: echo ${{ steps.yaml-lint.outputs.logfile }} >> logfile
       if: always()
       with:
         name: yamllint-logfile
