@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
+     - main
 
 jobs:
   lintAllTheThings:
@@ -21,12 +21,9 @@ jobs:
             trailing-spaces:
               level: warning
 
-  uploadArtifact:
-    runs-on: ubuntu-latest
-    steps:
     - uses: actions/upload-artifact@v2
     - name: uploading-logs
-      run: echo ${{ jobs.lintAllTheThings.steps.yaml-lint.outputs.logfile }} >> logfile 
+      run: echo ${{ steps.yaml-lint.outputs.logfile }} >> logfile
       if: always()
       with:
         name: yamllint-logfile
