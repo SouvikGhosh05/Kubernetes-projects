@@ -12,8 +12,6 @@ jobs:
     - uses: actions/checkout@v2
     - id: yaml-lint
       uses: ibiqlik/action-yamllint@v3
-    - name: adding-logfile
-      run: echo ${{ steps.yaml-lint.outputs.logfile }}
       with:
         config_data: |
           extends: default
@@ -25,6 +23,7 @@ jobs:
 
     - uses: actions/upload-artifact@v2
     - name: uploading-logs
+      run: echo ${{ steps.yaml-lint.outputs.logfile }}
       if: always()
       with:
         name: yamllint-logfile
