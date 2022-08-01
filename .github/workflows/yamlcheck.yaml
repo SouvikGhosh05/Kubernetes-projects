@@ -7,21 +7,17 @@ on:
 
 jobs:
   lintAllTheThings:
-    name: Yaml-Linting
+    name: yaml-linting
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - id: yaml-lint
       uses: ibiqlik/action-yamllint@v3
-      with:
-        config_data: |
-          extends: default
-          rules:
-            new-line-at-end-of-file:
-              level: warning
-            trailing-spaces:
-              level: warning
 
+  uploadArtifact:
+    needs: [lintAllTheThings]
+    runs-on: ubuntu-latest
+    steps:
     - name: uploading-logs
       uses: actions/upload-artifact@v2
     - run: echo ${{ steps.yaml-lint.outputs.logfile }}
