@@ -1,6 +1,6 @@
 name: Yaml Lint Check
 on: 
-  pull_request
+  pull_request:
   push:
     branches:
       - main
