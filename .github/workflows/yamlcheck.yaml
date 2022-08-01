@@ -7,6 +7,7 @@ on:
 
 jobs:
   lintAllTheThings:
+    name: Yaml-Linting
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,8 +22,8 @@ jobs:
             trailing-spaces:
               level: warning
 
-    - uses: actions/upload-artifact@v2
     - name: uploading-logs
+      uses: actions/upload-artifact@v2
       run: echo ${{ steps.yaml-lint.outputs.logfile }}
       if: always()
       with:
