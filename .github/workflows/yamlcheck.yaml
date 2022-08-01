@@ -20,7 +20,7 @@ jobs:
                 level: warning
               trailing-spaces:
                 level: warning
-              identation:
+              indentation:
                 level: warning
 
       - run: echo ${{ steps.yaml-lint.outputs.logfile }}
