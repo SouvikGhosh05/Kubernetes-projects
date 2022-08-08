@@ -24,6 +24,8 @@ jobs:
                 level: warning
               empty-lines:
                 level: warning
+              line-length:
+                level: warning
 
       - name: "Logging warnings"
         run: echo ${{ steps.yaml-lint.outputs.logfile }}
